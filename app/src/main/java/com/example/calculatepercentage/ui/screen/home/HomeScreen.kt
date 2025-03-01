@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.example.calculatepercentage.ui.screen.component.ZetaButtonBasic
 import com.example.calculatepercentage.ui.screen.component.ZetaOutlinedTextField
 import com.example.calculatepercentage.ui.screen.component.ZetaSpaceHeight
+import com.example.calculatepercentage.ui.screen.component.ZetaTwoCards
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -53,7 +54,16 @@ fun ContentHomeScreen(paddingValues: PaddingValues){
     ) {
         var price by remember { mutableStateOf("") }
         var discount by remember { mutableStateOf("") }
+        var priceDiscount by remember { mutableStateOf(0.0) }
+        var totalDiscount by remember { mutableStateOf(0.0) }
 
+        ZetaTwoCards(
+            title1 = "Precio",
+            number1 = priceDiscount,
+            title2 = "Descuento",
+            number2 = totalDiscount
+        )
+        ZetaSpaceHeight(30.dp)
         ZetaOutlinedTextField(
             value = price,
             onValueChange = {price = it},
