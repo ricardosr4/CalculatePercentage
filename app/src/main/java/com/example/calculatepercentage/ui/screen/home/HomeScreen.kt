@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.example.calculatepercentage.ui.screen.component.ZetaAlertDialog
 import com.example.calculatepercentage.ui.screen.component.ZetaButtonBasic
 import com.example.calculatepercentage.ui.screen.component.ZetaOutlinedTextField
 import com.example.calculatepercentage.ui.screen.component.ZetaSpaceHeight
@@ -56,6 +57,7 @@ fun ContentHomeScreen(paddingValues: PaddingValues){
         var discount by remember { mutableStateOf("") }
         var priceDiscount by remember { mutableStateOf(0.0) }
         var totalDiscount by remember { mutableStateOf(0.0) }
+        var showAlertDialog by remember { mutableStateOf(false) }
 
         ZetaTwoCards(
             title1 = "Precio",
@@ -73,22 +75,53 @@ fun ContentHomeScreen(paddingValues: PaddingValues){
         ZetaOutlinedTextField(
             value = discount,
             onValueChange = {discount = it},
-            label = "Descuento"
+            label = "Descuento %"
 
         )
         ZetaSpaceHeight()
         ZetaButtonBasic(
             text = "Calcular",
             color = Color.Black
-        ) { }
+        ) {
+            if (price != "" && discount != ""){
+                priceDiscount = calculatePrice(price.toDouble(), discount.toDouble())
+                totalDiscount = calculateDiscount(price.toDouble(), discount.toDouble())
+
+            }else{
+                showAlertDialog = true
+
+            }
+
+        }
         ZetaSpaceHeight()
         ZetaButtonBasic(
             text = "Limpiar",
             color = Color.Red
-        ) { }
+        ) {
+            price = ""
+            discount = ""
+            priceDiscount = 0.0
+            totalDiscount = 0.0
+        }
 
-
+        if (showAlertDialog){
+            ZetaAlertDialog(
+                title = "Alerta",
+                message = "Debes ingresar un precio y un descuento",
+                confirmText = "Aceptar",
+                onConfirmClick = { showAlertDialog = false }) {}
+        }
     }
+}
 
+fun calculatePrice(price: Double, discount: Double):Double{
+   val res = price - calculateDiscount(price, discount)
+    return kotlin.math.round(res * 100) / 100
+
+}
+
+fun calculateDiscount(price: Double, discount: Double): Double {
+    val res = price * (discount / 100)
+    return kotlin.math.round(res * 100) / 100
 }
 

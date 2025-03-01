@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -130,5 +131,26 @@ fun ZetaTwoCards(
             modifier = Modifier.weight(1f)
         )
     }
+
+}
+
+@Composable
+fun ZetaAlertDialog(
+    title: String,
+    message:String,
+    confirmText: String,
+    onConfirmClick: () -> Unit,
+    onDismissClick: () -> Unit
+){
+    AlertDialog(
+        onDismissRequest = onDismissClick,
+        title = { Text(text = title) },
+        text = { Text(text = message) },
+        confirmButton = {
+            OutlinedButton(onClick = onConfirmClick) {
+                Text(text = confirmText)
+            }
+        }
+    )
 
 }
