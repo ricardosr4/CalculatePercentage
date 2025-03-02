@@ -1,6 +1,7 @@
 package com.example.calculatepercentage.ui.screen.component
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -58,6 +60,7 @@ fun ZetaOutlinedTextField(
 fun ZetaButtonBasic(
     text: String,
     color: Color = MaterialTheme.colorScheme.primary,
+    textSize: TextUnit = 16.sp,
     onClick: () -> Unit){
     OutlinedButton(
         onClick = onClick,
@@ -67,9 +70,10 @@ fun ZetaButtonBasic(
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 30.dp)
+            .padding(horizontal = 50.dp)
+
     ) {
-        Text(text = text)
+        Text(text = text, fontSize = textSize)
     }
 
 }
@@ -79,32 +83,40 @@ fun ZetaCard(
     title: String,
     number: Double,
     modifier: Modifier = Modifier
-){
+) {
     Card(
-       modifier = modifier,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.LightGray
         )
     ) {
-        Column(
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+        Box(
             modifier = Modifier
-                .padding(16.dp)
+                .fillMaxWidth()
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
         ) {
-            Text(
-                text = title,
-                color = Color.Black,
-                fontSize = 20.sp
-            )
-            Text(
-                text = "$${number}",
-                color = Color.Black,
-                fontSize = 20.sp
-            )
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = title,
+                    color = Color.Black,
+                    fontSize = 20.sp
+                )
+                Text(
+                    text = "$${number}",
+                    color = Color.Black,
+                    fontSize = 20.sp
+                )
+            }
         }
     }
 }
+
 @Composable
 fun ZetaTwoCards(
     title1: String,
