@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Calculate Percentage</string>
+    <string name="title_app_bar">Calcular porcentaje</string>
+    <string name="precio_total">Precio Total</string>
+    <string name="precio">Precio </string>
+    <string name="descuento_card">Descuento</string>
+    <string name="descuento">Descuento %</string>
+    <string name="calcular">Calcular</string>
+    <string name="limpiar">Limpiar</string>
+    <string name="alerta">Alerta</string>
+    <string name="message_alert">Debes ingresar un precio y un descuento</string>
+    <string name="aceptar">Aceptar</string>
 </resources>
